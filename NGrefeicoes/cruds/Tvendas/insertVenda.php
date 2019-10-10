@@ -42,12 +42,13 @@
                         }
                     ?>
                 </select>
-                <label>Data</label>
-                <input type="date" name="data">
+                <label>Preço Unitario prod.</label>
+                <input type="number" name="preco" step="0.01" placeholder="Preço sem simbolo R$">
                 <label>Quantidade Vendida:</label>
                 <input type="number" name="quant" placeholder="Quantidade unitaria">
-                <label>Preço da Venda</label>
-                <input type="number" name="preco" step="0.01" placeholder="Preço sem simbolo R$">
+                <label>Data</label>
+                <input type="date" name="data">
+                
                 <button type="submit">Enviar</button>
             </form>
         </fieldset>

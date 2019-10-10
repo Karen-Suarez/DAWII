@@ -22,8 +22,8 @@
                 <ul id="menu">
                     <li><a href="../Ttipogastos/insertTipoGasto.html"> Inserir Tipo de Gastos</a></li>
                     <li><a href="../Tprodutos/insertProduto.html"> Inserir Produtos</a></li>
-                    <li><a href="../Tgastos/insertGasto.html"> Gastos</a></li>
-                    <li><a href="../Tvendas/insertVenda.html"> Vendas</a></li>
+                    <li><a href="../Tgastos/insertGasto.php"> Gastos</a></li>
+                    <li><a href="../Tvendas/insertVenda.php"> Vendas</a></li>
                     <li><a href="#"> Relatórios</a></li>
                     <li><a href="../../index.html">Inicio</a></li>
                 </ul>
