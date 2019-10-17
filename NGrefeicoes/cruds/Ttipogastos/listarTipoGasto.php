@@ -42,8 +42,8 @@
                         echo "<td>".$pos['IdTipoGasto']."</td>";
                         echo "<td>".$pos['NomeTipoGasto']."</td>";
                         echo "<td>".$pos['ComentarioTipoGasto']."</td>";
-                        echo "<td><a href='editarTipogasto.php?IdTipoGasto=".$pos['IdTipoGasto']."'>Edit</a></td>";
-                        echo "<td><a href='excluirTipogasto.php?IdTipoGasto=".$pos['IdTipoGasto']."'>Delete</a></td>";
+                        echo "<td><a href='editarTipoGasto.php?IdTipoGasto=".$pos['IdTipoGasto']."'>Edit</a></td>";
+                        echo "<td><a href='excluirTipoGasto.php?IdTipoGasto=".$pos['IdTipoGasto']."'>Delete</a></td>";
                         echo "</tr>";
                     }
                 ?>

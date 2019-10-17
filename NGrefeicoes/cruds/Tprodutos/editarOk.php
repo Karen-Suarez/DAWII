@@ -15,5 +15,5 @@ $objDP= new DadosProduto;
 
 
 if ($objDP->editar($objProd)) {
-    echo 'DADOS INSERIDOS COM SUCESSO';
+    echo 'DADOS EDITADOS COM SUCESSO';
 }

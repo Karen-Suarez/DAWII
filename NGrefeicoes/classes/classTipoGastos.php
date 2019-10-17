@@ -25,6 +25,9 @@ class TipoGastos {
     }
 
 // setter
+    public function setIdTipoGasto($IdTipoGasto) {
+        $this->IdTipoGasto= $IdTipoGasto;
+    }
     public function setNomeTipoGasto($NomeTipoGasto) {
         $this->NomeTipoGasto = $NomeTipoGasto;
     }
@@ -95,13 +98,13 @@ class dadosTipoGastos {
             $connectPDO->beginTransaction();
             $sqlSelect = "SELECT * FROM tipogastos WHERE IdTipoGasto = :IdTipoGasto";
             $preparedStm = $connectPDO->prepare($sqlSelect);
-            $preparedStm->bindValue(":IdTipoGasto", $produto->IdTipoGasto());
+            $preparedStm->bindValue(":IdTipoGasto", $produto->getIdTipoGasto());
             $preparedStm->execute();
             $linea = $preparedStm->fetch(PDO::FETCH_ASSOC); //trae una linea de datos
             
             if ($linea) {
                 $connectPDO->commit();
-                return $linea;/*CONTINUAR DE AQUUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII*******/
+                return $linea;
             } else {
                 $connectPDO->commit();
                 throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
@@ -116,7 +119,34 @@ class dadosTipoGastos {
         }
     }
 
-    public function ExcluirTipoGastos($IdTipoGastoParam) {
+    public function EditarTipoGastos($TipoGasto) {
+        $connectPDO;
+        try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->beginTransaction();
+            $sqlUpdate = "UPDATE tipogastos SET NomeTipoGasto = :NomeTipoGasto, ComentarioTipoGasto = :ComentarioTipoGasto WHERE IdTipoGasto = :IdTipoGasto";
+            $preparedstm = $connectPDO->prepare($sqlUpdate);
+            $preparedstm->bindValue("NomeTipoGasto", $TipoGasto->getNomeTipoGasto());
+            $preparedstm->bindValue("ComentarioTipoGasto", $TipoGasto->getComentarioTipoGasto());
+            $preparedstm->bindValue("IdTipoGasto", $TipoGasto->getIdTipoGasto());
+            
+            if ($preparedstm->execute() == TRUE) {
+                $connectPDO->commit();
+                return TRUE;
+            } else {
+                $connectPDO->commit();
+                throw new PDOException("Error Processing Request" . $preparedstm->errorCode() . "-" . implode($preparedstm->errorInfo()));
+            }
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+        } finally {
+            if (isset($connectPDO)) {
+                unset($connectPDO);
+            }
+        }
+    }
+    
+     public function ExcluirTipoGastos($IdTipoGastoParam) {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
@@ -135,27 +165,6 @@ class dadosTipoGastos {
             $connectPDO->commit();
         } catch (PDOException $e) {
             echo $e->getMessage();
-        } finally {
-            if (isset($connectPDO)) {
-                unset($connectPDO);
-            }
-        }
-    }
-
-    public function EditarTipoGastos($NomeTipoGastoParam, $IdTipoGastoParam) {
-        $connectPDO;
-        try {
-            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
-            $connectPDO->beginTransaction();
-            $sqlUpdate = "UPDATE tipogasos SET NomeTipoGasto = :NomeTipoGasto WHERE IdTipoGasto= :IdTipoGasto";
-            $preparedstm = $connectPDO->prepare($sqlUpdate);
-            $preparedstm->bindValue("NomeTipoGasto", $NomeTipoGastoParam);
-
-            /* TERMINAAAAAAAAAAAAAAAAAAAR */
-            /* TERMINAAAAAAAAAAAAAAAAAAAR */
-            /* TERMINAAAAAAAAAAAAAAAAAAAR */
-        } catch (PDOException $exc) {
-            echo $exc->getMessage();
         } finally {
             if (isset($connectPDO)) {
                 unset($connectPDO);
