@@ -15,9 +15,11 @@ class TipoGastos {
     public function getIdTipoGasto() {
         return $this->IdTipoGasto;
     }
+
     public function getNomeTipoGasto() {
         return $this->NomeTipoGasto;
     }
+
     public function getComentarioTipoGasto() {
         return $this->ComentarioTipoGasto;
     }
@@ -26,6 +28,7 @@ class TipoGastos {
     public function setNomeTipoGasto($NomeTipoGasto) {
         $this->NomeTipoGasto = $NomeTipoGasto;
     }
+
     public function setComentarioTipoGasto($ComentarioTipoGasto) {
         $this->ComentarioTipoGasto = $ComentarioTipoGasto;
     }
@@ -64,6 +67,7 @@ class dadosTipoGastos {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); // arregla caracteres especiales
             $connectPDO->beginTransaction();
             $sqlSelect = "SELECT IdTipoGasto, NomeTipoGasto,ComentarioTipoGasto FROM tipogastos";
             $preparedStm = $connectPDO->prepare($sqlSelect);
@@ -77,6 +81,34 @@ class dadosTipoGastos {
             $connectPDO->commit();
         } catch (PDOException $e) {
             echo $e->getMessage();
+        } finally {
+            if (isset($connectPDO)) {
+                unset($connectPDO);
+            }
+        }
+    }
+
+    public function traeUno($produto) {
+        $connectPDO;
+        try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->beginTransaction();
+            $sqlSelect = "SELECT * FROM tipogastos WHERE IdTipoGasto = :IdTipoGasto";
+            $preparedStm = $connectPDO->prepare($sqlSelect);
+            $preparedStm->bindValue(":IdTipoGasto", $produto->IdTipoGasto());
+            $preparedStm->execute();
+            $linea = $preparedStm->fetch(PDO::FETCH_ASSOC); //trae una linea de datos
+            
+            if ($linea) {
+                $connectPDO->commit();
+                return $linea;/*CONTINUAR DE AQUUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII*******/
+            } else {
+                $connectPDO->commit();
+                throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
+            }
+            
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
         } finally {
             if (isset($connectPDO)) {
                 unset($connectPDO);

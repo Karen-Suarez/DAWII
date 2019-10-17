@@ -16,11 +16,11 @@ print_r($lista);*/
     <label>Nome</label>
     <input type="text" name="NomeProduto" value="<?php echo $lista['NomeProduto'];?>" required/><br>
     <label>Preço</label>
-    <input type="number" name="PrecoProduto" value="<?php echo $lista['PrecoProduto'];?>" required/><br>
-    <label>Comentario</label>
-    <input  size="40" type="text" name="ComentarioProduto" value="<?php echo $lista['ComentarioProduto'];?>"/><br>
+    <input type="number" name="PrecoProduto" step="0.01" value="<?php echo $lista['PrecoProduto'];?>" required/><br>
+    <label>Comentario</label><br>
+    <textarea  size="40" rows="4" type="text" name="ComentarioProduto"><?php echo $lista['ComentarioProduto'];?></textarea><br>
     
-    <input type="hidden" name="IdProduto" value="<?php echo $lista->IdProduto;?>"/><br>
+    <input type="hidden" name="IdProduto" value="<?php echo $lista['IdProduto'];?>"/><br>
     
     <input type="submit" name="ENVIAR"/>
 

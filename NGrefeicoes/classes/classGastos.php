@@ -84,6 +84,7 @@ class DadosGastos {
         $connectionPDO;
         try {
             $connectionPDO= new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectionPDO->exec('set names utf8'); // lee caracteres especiales
             $connectionPDO->beginTransaction();
             $sqlSelect="SELECT gastos.*, tipogastos.NomeTipoGasto FROM gastos INNER JOIN tipogastos ON gastos.IdTipoGastoFk = tipogastos.IdTipoGasto";
             $preparedStm= $connectionPDO->prepare($sqlSelect);

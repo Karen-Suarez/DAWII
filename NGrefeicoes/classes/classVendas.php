@@ -90,6 +90,7 @@ class DadosVenda {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8');// lee caracteres especiales
             $connectPDO->beginTransaction();
             $sqlSelect = "SELECT vendas.*, produtos.NomeProduto FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto";
             $preparedStm = $connectPDO->prepare($sqlSelect);

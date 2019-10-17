@@ -34,6 +34,7 @@ class Produtos {
     public function setIdProduto($IdProduto) {
         return $this->IdProduto = $IdProduto;
     }
+
     public function setNomeProduto($NomeProduto) {
         $this->NomeProduto = $NomeProduto;
     }
@@ -80,6 +81,7 @@ class DadosProduto {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); // lee caracteres especiales
             $connectPDO->beginTransaction();
             $selectSql = "SELECT IdProduto, NomeProduto, PrecoProduto, ComentarioProduto FROM produtos";
             $preparedStm = $connectPDO->prepare($selectSql);
@@ -109,11 +111,8 @@ class DadosProduto {
             $preparedStm = $connectPDO->prepare($sqlSelect);
             $preparedStm->bindValue(":IdProduto", $produto->getIdProduto());
             $preparedStm->execute();
-            $linea= $preparedStm->fetch(PDO::FETCH_ASSOC);
-            
-            var_dump($linea);
+            $linea = $preparedStm->fetch(PDO::FETCH_ASSOC); //trae una linea de datos
             if ($linea) {
-                
                 $connectPDO->commit();
                 return $linea;
             } else {
@@ -132,10 +131,11 @@ class DadosProduto {
     public function editar($produto) {
         $connectPDO;
         try {
-            $connectPDO= new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
             $connectPDO->beginTransaction();
-            $updateSql="UPDATE produtos SET NomeProduto = :NomeProduto, PrecoProduto = :PrecoProduto, ComentarioProduto = :ComentarioProduto";
-            $preparedStm= $connectPDO->prepare($updateSql);
+            $updateSql = "UPDATE produtos SET NomeProduto = :NomeProduto, PrecoProduto = :PrecoProduto, ComentarioProduto = :ComentarioProduto WHERE IdProduto = :IdProduto";
+            $preparedStm = $connectPDO->prepare($updateSql);
+            $preparedStm->bindValue(":IdProduto", $produto->getIdProduto());
             $preparedStm->bindValue(":NomeProduto", $produto->getNomeProduto());
             $preparedStm->bindValue(":PrecoProduto", $produto->getPrecoProduto());
             $preparedStm->bindValue(":ComentarioProduto", $produto->getComentarioProduto());
@@ -146,9 +146,38 @@ class DadosProduto {
                 $connectPDO->commit();
                 throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
             }
-        } catch (PDOException $exc) { echo $exc->getMessage();
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
         } finally {
-            if (isset($connectPDO)) {unset($connectPDO);}
+            if (isset($connectPDO)) {
+                unset($connectPDO);
+            }
         }
     }
+
+    public function excluir($produto) {
+        $connectPDO;
+        try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->beginTransaction();
+            $sqlDelete = "DELETE FROM produtos WHERE IdProduto = :IdProduto";
+            $preparedStm = $connectPDO->prepare($sqlDelete);
+            $preparedStm->bindValue(":IdProduto", $produto->getIdProduto());
+
+            if ($preparedStm->execute() == TRUE) {
+                $connectPDO->commit();
+                return TRUE;
+            } else {
+                $connectPDO->commit();
+                throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
+            }
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+        } finally {
+            if (isset($connectPDO)) {
+                unset($connectPDO);
+            }
+        }
+    }
+
 }

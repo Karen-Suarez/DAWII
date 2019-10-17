@@ -11,7 +11,7 @@
     $produto->setComentarioProduto($comentarioProd);
     $dadosProd= new DadosProduto();
     $ok= $dadosProd->insert($produto);
-    var_dump($ok);
+    
     if ($ok) {
         echo "Dados insertados";
     }else {
