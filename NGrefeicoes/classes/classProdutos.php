@@ -132,6 +132,7 @@ class DadosProduto {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); // arregla caracteres especiales
             $connectPDO->beginTransaction();
             $updateSql = "UPDATE produtos SET NomeProduto = :NomeProduto, PrecoProduto = :PrecoProduto, ComentarioProduto = :ComentarioProduto WHERE IdProduto = :IdProduto";
             $preparedStm = $connectPDO->prepare($updateSql);

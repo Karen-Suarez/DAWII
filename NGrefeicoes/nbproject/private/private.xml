@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/DAWII/NGrefeicoes/classes/classProdutos.php</file>
             <file>file:/C:/xampp/htdocs/DAWII/NGrefeicoes/classes/classTipoGastos.php</file>
-            <file>file:/C:/xampp/htdocs/DAWII/NGrefeicoes/cruds/Ttipogastos/editarTipoGasto.php</file>
-            <file>file:/C:/xampp/htdocs/DAWII/NGrefeicoes/cruds/Ttipogastos/excluirTipoGasto.php</file>
-            <file>file:/C:/xampp/htdocs/DAWII/NGrefeicoes/cruds/Ttipogastos/editarok.php</file>
+            <file>file:/C:/xampp/htdocs/DAWII/NGrefeicoes/classes/classVendas.php</file>
+            <file>file:/C:/xampp/htdocs/DAWII/NGrefeicoes/classes/classGastos.php</file>
         </group>
     </open-files>
 </project-private>
