@@ -44,6 +44,9 @@ class Gastos {
     }
 
 // setters
+    public function setIdGasto($IdGasto) {
+        $this->IdGasto= $IdGasto;
+    }
     public function setDataGasto($DataGasto) {
         $this->DataGasto = $DataGasto;
     }
@@ -125,11 +128,12 @@ class DadosGastos {
             $connectionPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
             $connectionPDO->exec('set names utf8'); // lee caracteres especiales
             $connectionPDO->beginTransaction();
-            $sqlSelect = "SELECT * FROM gastos WHERE :IdGasto = :IdGasto";
+            //$sqlSelect = "SELECT * FROM gastos WHERE IdGasto = :IdGasto";
+            $sqlSelect="SELECT gastos.*, tipogastos.NomeTipoGasto FROM gastos INNER JOIN tipogastos ON gastos.IdTipoGastoFk = tipogastos.IdTipoGasto WHERE IdGasto = :IdGasto";
             $preparedStm = $connectionPDO->prepare($sqlSelect);
             $preparedStm->bindValue(":IdGasto", $gasto->getIdGasto());
             $preparedStm->execute();
-            $linea= $preparedStm->fetch(PDO::FETCH_ASSOC);//TRAE UNA LINEA
+            $linea = $preparedStm->fetch(PDO::FETCH_ASSOC); //TRAE UNA LINEA
             if ($linea) {
                 $connectionPDO->commit();
                 return $linea;
@@ -147,20 +151,52 @@ class DadosGastos {
     }
 
     public function editar($gasto) {
-        $connectionPDO;
+        $connectPDO;
         try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->beginTransaction();
+            $sqlUpdate="UPDATE gastos SET DataGasto = :DataGasto, HoraGasto = :HoraGasto, ValorGasto = :ValorGasto, ComentarioGasto = :ComentarioGasto WHERE IdGasto = :IdGasto";
+            $preparedStm= $connectPDO->prepare($sqlUpdate);
+            $preparedStm->bindValue(":IdGasto", $gasto->getIdGasto());
+            $preparedStm->bindValue(":DataGasto", $gasto->getDataGasto());
+            $preparedStm->bindValue(":HoraGasto", $gasto->getHoraGasto());
+            $preparedStm->bindValue(":ValorGasto", $gasto->getValorGasto());
+            $preparedStm->bindValue(":ComentarioGasto", $gasto->getComentarioGasto());
+            
+            if ($preparedStm->execute() == TRUE) {
+                $connectPDO->commit();
+                return TRUE;
+            } else {
+                $connectPDO->commit();
+                throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
+            }
             
         } catch (PDOException $exc) {
             echo $exc->getMessage();
-        } finally {
-            if (isset($connectionPDO)) {
-                unset($connectionPDO);
-            }
-        }
-        }
+        } finally {if (isset($connectPDO)) {unset($connectPDO);} }
+    }
 
     public function excluir($gasto) {
-        
+        try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); // lee caracteres especiales
+            $connectPDO->beginTransaction();
+            $sqldelete = "DELETE FROM gastos WHERE IdGasto = :IdGasto";
+            $preparedStm = $connectPDO->prepare($sqldelete);
+            $preparedStm->bindValue(":IdGasto", $gasto->getIdGasto());
+
+            if ($preparedStm->execute() == TRUE) {
+                $connectPDO->commit();
+                return TRUE;
+            } else {
+                $connectPDO->commit();
+                throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
+            }
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+        } finally {
+            
+        }
     }
 
 }

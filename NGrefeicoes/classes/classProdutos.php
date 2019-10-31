@@ -55,6 +55,7 @@ class DadosProduto {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); //LEE CARACTERES ESPECIALES
             $connectPDO->beginTransaction();
             $sqlInsert = "INSERT INTO  produtos (NomeProduto, PrecoProduto, ComentarioProduto) VALUES (:NomeProduto, :PrecoProduto, :ComentarioProduto)";
             $preparedStm = $connectPDO->prepare($sqlInsert);
