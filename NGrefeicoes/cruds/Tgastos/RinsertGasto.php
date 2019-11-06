@@ -18,7 +18,8 @@ $objDadosGasto= new DadosGastos();
 $obj= $objDadosGasto->insert($objGasto);
 
 if ($obj == TRUE) {
-    echo '<br>GASTO INSERTADO CORRECTAMENTE';
+    //echo '<br>GASTO INSERTADO CORRECTAMENTE';
+    header('Location: listarGasto.php');
 } else {
     echo '<br>OPS DEU ERRO';
 }

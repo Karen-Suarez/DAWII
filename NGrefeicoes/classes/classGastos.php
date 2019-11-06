@@ -155,13 +155,15 @@ class DadosGastos {
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
             $connectPDO->beginTransaction();
-            $sqlUpdate="UPDATE gastos SET DataGasto = :DataGasto, HoraGasto = :HoraGasto, ValorGasto = :ValorGasto, ComentarioGasto = :ComentarioGasto WHERE IdGasto = :IdGasto";
+            $sqlUpdate="UPDATE gastos SET DataGasto = :DataGasto, HoraGasto = :HoraGasto, ValorGasto = :ValorGasto, ComentarioGasto = :ComentarioGasto, IdTipoGastoFk = :IdTipoGastoFk WHERE IdGasto = :IdGasto";
             $preparedStm= $connectPDO->prepare($sqlUpdate);
             $preparedStm->bindValue(":IdGasto", $gasto->getIdGasto());
             $preparedStm->bindValue(":DataGasto", $gasto->getDataGasto());
             $preparedStm->bindValue(":HoraGasto", $gasto->getHoraGasto());
             $preparedStm->bindValue(":ValorGasto", $gasto->getValorGasto());
             $preparedStm->bindValue(":ComentarioGasto", $gasto->getComentarioGasto());
+            $preparedStm->bindValue(":IdTipoGastoFk", $gasto->getIdTipoGastoFk());
+            
             
             if ($preparedStm->execute() == TRUE) {
                 $connectPDO->commit();

@@ -14,7 +14,7 @@ $objVenda->setPrecoVenda($preco);
 $objVenda->setIdProdutoFk($idProduto);
 $dadosInsert = new DadosVenda();
 if ($dadosInsert->insert($objVenda) == TRUE) {
-    echo 'dados inseridos com sucesso!!!';
+     header('location:listarVenda.php');
 }else {
-    echo 'PUTS DEU ERRO!!!';
+    echo 'DEU ERRO!!!';
 }

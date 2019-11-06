@@ -31,7 +31,7 @@ $li = $lista->listar($listarVenda);
         <div class="conteudo">
             <table border>
                 <thead>
-                <td>Id</td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDATA&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </td><td>&nbspQuantidade&nbsp</td><td>Preco&nbspUnitario</td><td>Nome Produto</td>
+                <td>Id</td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDATA&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </td><td>&nbspQuantidade&nbsp</td><td>Preco&nbspUnitario</td><td>&nbspNome&nbsp&nbspProduto&nbsp</td>
                 </thead>
                 <tbody>
                     <?php
