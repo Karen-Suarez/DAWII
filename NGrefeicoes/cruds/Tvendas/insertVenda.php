@@ -33,6 +33,8 @@
                 <h1>Vendas</h1>
             </legend>
             <form method="POST" action="rInsertVenda.php">
+                <label>Data</label>
+                <input type="date" name="data">
                 <label>Escolha o Produto Vendido:</label>
                 <select name="produto">
                     <option value="">Selecione</option>
@@ -42,12 +44,10 @@
                         }
                     ?>
                 </select>
-                <label>Preço Unitario prod.</label>
-                <input type="number" name="preco" step="0.01" placeholder="Preço sem simbolo R$">
                 <label>Quantidade Vendida:</label>
                 <input type="number" name="quant" placeholder="Quantidade unitaria">
-                <label>Data</label>
-                <input type="date" name="data">
+                <label>Preço Unitario prod.</label>
+                <input type="number" name="preco" step="0.01" placeholder="Preço sem simbolo R$">
                 
                 <button type="submit">Enviar</button>
             </form>

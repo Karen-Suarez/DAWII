@@ -12,7 +12,8 @@ $insert = new dadosTipoGastos();
 $insertok = $insert->insert($tipoGasto);
 
 if ($insertok) {
-    echo "dados incluidos com sucesso";
+    //echo "dados incluidos com sucesso";
+    header('Location: insertTipoGasto.html');
 }else{
     echo"DEU ERRO";
 }

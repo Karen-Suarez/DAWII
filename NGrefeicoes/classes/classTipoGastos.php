@@ -44,6 +44,7 @@ class dadosTipoGastos {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', ''); //conexao c/ banco
+            $connectPDO->exec('set names utf8'); 
             $connectPDO->beginTransaction(); //inicia la trans. c/ bd.
             $sqlInsert = "INSERT INTO tipogastos  (NomeTipoGasto, ComentarioTipoGasto) VALUES (:NomeTipoGasto, :ComentarioTipoGasto)"; //SQL sentence
             $preparedStm = $connectPDO->prepare($sqlInsert); //Prepare(): prepara la sentencia SQL para luego ser ejecutada por el método execute().

@@ -9,13 +9,13 @@ class Gastos {
     private $ComentarioGasto;
     private $IdTipoGastoFk;
 
-    public function __construct(/* $IdGasto,$DataGasto,$HoraGasto,$ValorGasto,$ComentarioGasto,$IdTipoGastoFk */) {
-        /* $this->IdGasto = $IdGasto;
+    function __construct( /*$IdGasto,$DataGasto,$HoraGasto,$ValorGasto,$ComentarioGasto,$IdTipoGastoFk*/) {
+          /*$this->IdGasto = $IdGasto;
           $this->DataGasto = $DataGasto;
           $this->HoraGasto = $HoraGasto;
           $this->ValorGasto = $ValorGasto;
           $this->ComentarioGasto = $ComentarioGasto;
-          $this->IdTipoGastoFk = $IdTipoGastoFk; */
+          $this->IdTipoGastoFk = $IdTipoGastoFk;*/
     }
 
 // getters

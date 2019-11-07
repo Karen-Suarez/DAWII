@@ -13,7 +13,7 @@
     $ok= $dadosProd->insert($produto);
     
     if ($ok) {
-        echo "Dados insertados";
+        header('Location: insertProduto.html');
     }else {
         echo"opss deu ERROO!";
     }
