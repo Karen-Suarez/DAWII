@@ -8,30 +8,26 @@
           		<div class="col-lg-12">
                   <div class="form-panel">
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> INSERIR PRODUTO</h4>
-                      <form class="form-horizontal style-form" method="get">
+                      <form class="form-horizontal style-form" action="rInsertProduto.php" method="POST">
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">NOME</label>
+                              <label class="col-sm-2 col-sm-2 control-label">NOME MODIFICADO!!!</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input  type="text" name="nomeProduto" class="form-control">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">PREÇO</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input step="0.01" type="number" name="precoProduto" placeholder="Preço sem simbolo R$" class="form-control">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">COMENTARIO</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" name="comentarioProd" class="form-control">
                               </div>
                           </div>
-                          
-                          <div class="showback">
-      					        <!--<i class="fa fa-angle-right"></i> -->
-						        <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button>
-					      </div>
+                          <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button>
                       </form>
                   </div>
           		</div><!-- col-lg-12-->      	

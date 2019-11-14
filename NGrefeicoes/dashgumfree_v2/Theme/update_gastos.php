@@ -1,9 +1,17 @@
-<?php 
-    include_once "topo.html";
-    include_once '../../classes/classTipoGastos.php';
-    $objTipoGasto = new TipoGastos();
-    $lista = new dadosTipoGastos();
-    $l = $lista->ListarTipoGastos($objTipoGasto);
+<?php
+include_once "topo.html";
+include_once '../../classes/classGastos.php';
+include_once '../../classes/classTipoGastos.php';
+$idGasto= $_GET['IdGasto'];
+$objGasto = new Gastos();
+$objGasto->setIdGasto($idGasto);
+$objDG= new DadosGastos();
+$lista= $objDG->traeUno($objGasto);
+
+$objTipoGasto = new TipoGastos();
+$objDTG = new dadosTipoGastos();
+$listaTipoGasto = $objDTG->ListarTipoGastos($objTipoGasto);
+
 ?>
           	<h3><i class="fa fa-angle-right"></i> GASTOS</h3>
           	
@@ -12,45 +20,49 @@
           		<div class="col-lg-12">
                   <div class="form-panel">
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> INCLUIR GASTOS</h4>
-                      <form class="form-horizontal style-form" method="POST" action="RinsertGasto.php">
+                      <form class="form-horizontal style-form" action="editarOk.php" method="POST">
 
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">ESCOLHA O TIPO DE GASTO</label>
                               <div class="col-sm-10">
-                              <select name="idTipoGastoFk" class="form-control">
-                                <option value="">Selecione</option>
+                              
+                            <select name="TipoGasto" class="form-control">
+                                <option value="<?php echo $lista['IdTipoGastoFk']; ?>"><?php echo $lista['NomeTipoGasto']; ?></option>
                                 <?php
-                                foreach ($l as $linha) {
-                                    echo"<option value='$linha[IdTipoGasto]'>$linha[NomeTipoGasto]</option>";
+                                    foreach ($listaTipoGasto as $linha) {
+                                        echo"<option value='$linha[IdTipoGasto]'>$linha[NomeTipoGasto]</option>";
                                     }
                                 ?>
-                              </select>
-                              </div>
+                            </select> 
+                            </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">DATA</label>
                               <div class="col-sm-10">
-                                  <input type="date" name="dataGasto" class="form-control">
+                                  <input type="date" name="DataGasto" class="form-control" value="<?php echo $lista['DataGasto'];?>" required>
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">HORA</label>
                               <div class="col-sm-10">
-                                  <input type="time" name="horaGasto"  class="form-control">
+                                  <input type="time" name="HoraGasto" class="form-control" value="<?php echo $lista['HoraGasto'];?>" required>
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">VALOR</label>
                               <div class="col-sm-10">
-                                  <input type="number" step="0.01" name="valorGasto" placeholder="valor sem simbolo R$" class="form-control">
+                                  <input type="number" name="ValorGasto" step="0.01" class="form-control" value="<?php echo $lista['ValorGasto'];?>" required>
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">COMENTARIO</label>
                               <div class="col-sm-10">
-                                  <input name="comentarioGasto" placeholder="Digite algum comentario se desejar." class="form-control">
+                                  <input type="text" name="ComentarioGasto" class="form-control" <?php echo $lista['ComentarioGasto'];?> >
                               </div>
                           </div>
+
+                          <input type="hidden" name="IdGasto" value="<?php echo $lista['IdGasto'];?>"/><br>
+
                           <div class="showback">
       					        <!--<i class="fa fa-angle-right"></i> -->
 						        <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button>

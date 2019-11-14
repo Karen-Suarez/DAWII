@@ -7,11 +7,11 @@ include_once '../../classes/classTipoGastos.php';
  $l=$lista->ListarTipoGastos($listaTipoGasto);
  //print_r($l);
 ?>
-          	<h3><i class="fa fa-angle-right"></i> Responsive Table Examples</h3>
+          	<h3><i class="fa fa-angle-right"></i> Tipo de Gastos</h3>
 		  		<div class="row mt">
 			  		<div class="col-lg-12">
                       <div class="content-panel">
-                      <h4><i class="fa fa-angle-right"></i> Vendas</h4>
+                      <h4><i class="fa fa-angle-right"></i> Gastos</h4>
                           <section id="unseen">
                             <table class="table table-bordered table-striped table-condensed">
                               <thead>
@@ -29,7 +29,7 @@ include_once '../../classes/classTipoGastos.php';
                                         echo "<td>".$pos['IdTipoGasto']."</td>";
                                         echo "<td>".$pos['NomeTipoGasto']."</td>";
                                         echo "<td>".$pos['ComentarioTipoGasto']."</td>";
-                                        echo "<td><a href='editarTipoGasto.php?IdTipoGasto=".$pos['IdTipoGasto']."'>Edit</a></td>";
+                                        echo "<td><a href='editar_tipo_gasto.php?IdTipoGasto=".$pos['IdTipoGasto']."'>Edit</a></td>";
                                         echo "<td><a href='excluirTipoGasto.php?IdTipoGasto=".$pos['IdTipoGasto']."'>Delete</a></td>";
                                         echo "</tr>";
                                     }

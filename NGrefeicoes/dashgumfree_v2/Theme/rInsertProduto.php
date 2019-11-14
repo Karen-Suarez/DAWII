@@ -1,5 +1,4 @@
 <?php 
-    include_once 'topo.html';
     include_once '../../classes/classProdutos.php';
 
     $nomeProduto = $_POST['nomeProduto'];
@@ -18,6 +17,4 @@
     }else {
         echo"opss deu ERROO!";
     }
-
-    include_once 'rodape.html';
 ?>
