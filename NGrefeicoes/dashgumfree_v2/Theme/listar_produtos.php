@@ -15,7 +15,7 @@ $l= $lista->listar($objProduto);
                               <thead>
                               <tr>
                                     <th>id</th>
-                                    <th>nome</th>
+                                    <th>Nome</th>
                                     <th>Preco</th>
                                     <th >Comentario</th>
                               </tr>
@@ -28,8 +28,8 @@ $l= $lista->listar($objProduto);
                                         echo "<td>".$pos['NomeProduto']."</td>";
                                         echo "<td>R$&nbsp".$pos['PrecoProduto']."&nbsp</td>";
                                         echo "<td>&nbsp".$pos['ComentarioProduto']."</td>";
-                                        echo "<td><a href='editarProduto.php?IdProduto=".$pos['IdProduto']."'>Edit</a></td>";
-                                        echo "<td><a href='excluirProduto.php?IdProduto=".$pos['IdProduto']."'>Delete</a></td>";
+                                        echo "<td><a href='editar_produtos.php?IdProduto=".$pos['IdProduto']."'>Edit</a></td>";
+                                        echo "<td><a href='excluir_produto.php?IdProduto=".$pos['IdProduto']."'>Delete</a></td>";
                                         echo "</tr>";
                                     }
                                     ?>

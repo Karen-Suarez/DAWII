@@ -44,7 +44,7 @@ class dadosTipoGastos {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', ''); //conexao c/ banco
-            $connectPDO->exec('set names utf8'); 
+            $connectPDO->exec('set names utf8'); //caracteres especiales
             $connectPDO->beginTransaction(); //inicia la trans. c/ bd.
             $sqlInsert = "INSERT INTO tipogastos  (NomeTipoGasto, ComentarioTipoGasto) VALUES (:NomeTipoGasto, :ComentarioTipoGasto)"; //SQL sentence
             $preparedStm = $connectPDO->prepare($sqlInsert); //Prepare(): prepara la sentencia SQL para luego ser ejecutada por el método execute().
@@ -96,6 +96,7 @@ class dadosTipoGastos {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); 
             $connectPDO->beginTransaction();
             $sqlSelect = "SELECT * FROM tipogastos WHERE IdTipoGasto = :IdTipoGasto";
             $preparedStm = $connectPDO->prepare($sqlSelect);
@@ -124,6 +125,7 @@ class dadosTipoGastos {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); 
             $connectPDO->beginTransaction();
             $sqlUpdate = "UPDATE tipogastos SET NomeTipoGasto = :NomeTipoGasto, ComentarioTipoGasto = :ComentarioTipoGasto WHERE IdTipoGasto = :IdTipoGasto";
             $preparedstm = $connectPDO->prepare($sqlUpdate);

@@ -2,24 +2,18 @@
 include_once './topo.html';
 include_once '../../classes/classTipoGastos.php';
 
-$Id = $_POST['IdTipoGasto'];
+$tipoGastoId= $_GET['IdTipoGasto'];
 
-$NomeTipoGasto = $_POST['NomeTipoGasto'];
-$ComentarioTipoGasto = $_POST['ComentarioTipoGasto'];
+$obj = new TipoGastos();
+$objD = new dadosTipoGastos();
 
 
-$objTgEdit= new TipoGastos();
-$objTgEdit->setNomeTipoGasto($NomeTipoGasto);
-$objTgEdit->setComentarioTipoGasto($ComentarioTipoGasto);
-$objTgEdit->setIdTipoGasto($Id);
-$objDtg= new dadosTipoGastos();
-
-if ($objDtg->EditarTipoGastos($objTgEdit)) {
-    //echo 'DADOS EDITADOS COM SUCESSO';
+if ($objD->ExcluirTipoGastos($tipoGastoId)) {
+    //echo 'dados EXCLUIDO com sucesso!';  
     ?>
 
     <div class="showback">
-        <h4> Dados editados com sucesso!!!</h4>
+        <h4> Dado excluído com sucesso!!!</h4>
         <div class="btn-group btn-group-justified">
             <div class="btn-group">
                 <button type="button" class="btn btn-theme" onclick="window.location='listar_tipo_gastos.php'">Voltar pra lista</button>

@@ -7,11 +7,11 @@
     $lista =  new DadosGastos();
     $l=$lista->listar($listaGasto);
 ?>
-          	<h3><i class="fa fa-angle-right"></i> Responsive Table Examples</h3>
+          	<h3><i class="fa fa-angle-right"></i> Gastos</h3>
 		  		<div class="row mt">
 			  		<div class="col-lg-12">
                       <div class="content-panel">
-                      <h4><i class="fa fa-angle-right"></i> Vendas</h4>
+                      
                           <section id="unseen">
                             <table class="table table-bordered table-striped table-condensed">
                               <thead>

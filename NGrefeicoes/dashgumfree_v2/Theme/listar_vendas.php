@@ -31,8 +31,8 @@
                                         echo "<td>R$&nbsp" . $pos['PrecoVenda'] . "</td>";
                                         echo "<td>" . $pos['NomeProduto'] . "</td>";
                         
-                                        echo "<td><a href='editarVenda.php?IdVenda=" . $pos['IdVenda'] . "'>Edit</a></td>";
-                                        echo "<td><a href='excluirVenda.php?IdVenda=" . $pos['IdVenda'] . "'>Delete</a></td>";
+                                        echo "<td><a href='editar_venda.php?IdVenda=" . $pos['IdVenda'] . "'>Edit</a></td>";
+                                        echo "<td><a href='excluir_venda.php?IdVenda=" . $pos['IdVenda'] . "'>Delete</a></td>";
                                         echo "</tr>";
                                     }
                                     ?>
