@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php
+    session_start();
+    //session_destroy();
+    if(!isset($_SESSION['login'])){
+     header("Location:loginCopy.php");  
+    }
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -47,7 +54,7 @@
             
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login.html">Logout</a></li>
+                    <li><a class="logout" href="logout.php">Logout</a></li>
             	</ul>
             </div>
         </header>

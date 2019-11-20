@@ -1,4 +1,4 @@
-<?php include_once "topo.html";
+<?php include_once "topo.php";
 include_once "../../classes/classVendas.php";
 $listarVenda = new Vendas();
 $lista = new DadosVenda();

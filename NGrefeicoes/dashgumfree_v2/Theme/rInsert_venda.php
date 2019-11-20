@@ -1,5 +1,5 @@
 <?php
-include_once './topo.html';
+include_once './topo.php';
 include_once '../../classes/classVendas.php';
 
 $idProduto = $_POST['produto'];
