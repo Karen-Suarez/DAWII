@@ -201,4 +201,15 @@ class DadosGastos {
         }
     }
 
+    public function buscarGastoXdata($gasto){
+        # code...
+    }
+    public function buscarGastoXtipoGasto($gasto){
+        # code...
+    }
+    public function totalGasto($gasto)
+    {
+        # code...
+    }
+
 }

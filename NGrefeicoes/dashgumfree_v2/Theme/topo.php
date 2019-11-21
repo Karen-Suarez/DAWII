@@ -85,9 +85,9 @@
                           <span>VENDAS</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="general.html">Adicionar Vendas</a></li>
-                          <li><a  href="buttons.html">Lista das vendas</a></li>
-                          <li><a  href="panels.html">Buscar Vendas</a></li>
+                          <li><a  href="insert_vendas.php">Adicionar Vendas</a></li>
+                          <li><a  href="listar_vendas.php">Lista das vendas</a></li>
+                          <li><a  href="#">Buscar Vendas</a></li>
                       </ul>
                   </li>
 
@@ -97,9 +97,9 @@
                           <span>GASTOS</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="calendar.html">Calendar</a></li>
-                          <li><a  href="gallery.html">Gallery</a></li>
-                          <li><a  href="todo_list.html">Todo List</a></li>
+                          <li><a  href="insert_gastos.php">Adicionar Gasto</a></li>
+                          <li><a  href="listar_gastos.php">Lista de Gastos</a></li>
+                          <li><a  href="#">buscar</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -108,9 +108,8 @@
                           <span>PRODUTOS</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank.html">Blank Page</a></li>
-                          <li><a  href="login.html">Login</a></li>
-                          <li><a  href="lock_screen.html">Lock Screen</a></li>
+                          <li><a  href="insert_produto.php">Adicionar Novo Produto</a></li>
+                          <li><a  href="listar_produtos.php">Lista de produtos</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -119,7 +118,8 @@
                           <span>TIPO GASTO</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="form_component.html">Form Components</a></li>
+                          <li><a  href="insert_tipo_gastos.php">Adicionar Novo Tipo de Gasto</a></li>
+                          <li><a  href="listar_tipo_gastos.php">Lista de Tipo de gastos</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">

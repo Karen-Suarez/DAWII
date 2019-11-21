@@ -2,7 +2,7 @@
 include_once '../../classes/classUsuario.php';
 $nome = $_POST['Nome'];
 $email = $_POST['Email'];
-$senha = $_POST['Senha'];
+$senha = hash('joaat', $_POST['Senha']);//trans. a senha com o hash
 
 $objuser= new Usuario();
 $objuser->setnome($nome);
@@ -17,3 +17,4 @@ if ($ok) {
     //echo 'deu merda!';
     header("Location:cadastroUser.php");  
 }
+/** TERMINAR SENHAS COM HASH"""""""""""""""""""!!!!!!!!!!!!!!!!!!!! */

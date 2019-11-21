@@ -181,7 +181,7 @@ class DadosVenda {
             $sqlDelete = "DELETE FROM vendas WHERE IdVenda= :IdVenda";
             $preparedStm = $connectPDO->prepare($sqlDelete);
             $preparedStm->bindValue(":IdVenda", $venda->getIdVenda());
-            $preparedStm->execute();
+            //$preparedStm->execute();
 
             if ($preparedStm->execute() == true) {
                 $connectPDO->commit();
@@ -197,6 +197,41 @@ class DadosVenda {
                 unset($connectPDO);
             }
         }
+    }
+
+    public function buscaVendasXdata($venda,$dataI,$dataF){
+        $connectPDO;
+        try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->beginTransaction();
+            //$sqlSelect = "SELECT * FROM vendas WHERE DataVenda BETWEEN '$dataI' AND '$dataF'";
+            $sqlSelect = "SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda BETWEEN '$dataI' AND '$dataF' GROUP BY vendas.IdVenda";
+            /*SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda BETWEEN '$dataI' AND '$dataF' GROUP BY vendas.IdVenda;*/
+            $preparedStm = $connectPDO->prepare($sqlSelect);
+            $preparedStm->bindValue(":IdVenda", $venda->getIdVenda());
+            //$preparedStm->execute();
+
+            if($preparedStm->execute() == true) {
+                $connectPDO->commit();
+                return $preparedStm->fetchAll();
+            } else {
+                throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
+            }
+            $connectPDO->commit();
+        }
+        catch (PDOException $e) {
+            echo $e->getMessage();
+        } finally {
+            if (isset($connectPDO)) {
+                unset($connectPDO);
+            }
+        }
+    }
+    public function buscarVendaXproduto($venda){
+        # code...
+    }
+    public function totalVenda($venda){
+        # code...
     }
 
 }
