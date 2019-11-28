@@ -35,7 +35,7 @@ if (isset($_POST['nomeProd'])) {
     <tbody>
         <?php
         if ($buscar == array()) {
-            echo "NO HAY CONSULTAS VINCULADAS A UN NOMBRE QUE TENGA ' {$nomeBusca} '";
+            echo "NO HAY CONSULTAS VINCULADAS A UN PRODUCTO QUE TENGA ' {$NomeProduto} '";
         } else {
             foreach ($buscar as $linha) {
                 echo "<tr>";
@@ -45,10 +45,6 @@ if (isset($_POST['nomeProd'])) {
                 echo "<td>" . $linha['PrecoVenda'] . "</td>";
                 echo "<td>" . $linha['NomeProduto'] . "</td>";
                 echo "<td>" . $linha['TOTAL'] . "</td>";
-
-                //echo"<td><a href='cancelarCons.php?idConsulta=" . $linha['idConsulta'] . "'>&nbspCANCELAR&nbsp</a></td>";
-                //echo"<td><a href='tratamentoConsulta.php?idConsulta=" . $linha['idConsulta'] . "'>&nbsp&nbspTRATAMENTO&nbsp</a></td>";
-
                 echo "</tr>";
             }
         }

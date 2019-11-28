@@ -5,19 +5,24 @@ include_once 'topo.php';
 <div class="row mt">
     <div class="col-lg-12">
         <div class="form-panel">
-            <h4 class="mb"><i class="fa fa-angle-right"></i> Lista de Vendas por data</h4>
+            <h4 class="mb"><i class="fa fa-angle-right"></i> Lista de Vendas por Produto</h4>
             <form class="form-horizontal style-form" name="form" action="#" method="POST">
                 <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">DATA INICIAL</label>
+                    <label class="col-sm-2 col-sm-2 control-label">Produto</label>
                     <div class="col-sm-10">
-                        <input type="date" name="dataI" class="form-control">
+                        <input type="text" name="nomeProd" placeholder="Nome do Produto" required class="form-control">
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">DATA FINAL</label>
+                    <label class="col-sm-2 col-sm-2 control-label">Data inicial</label>
                     <div class="col-sm-10">
-                        <input type="date" name="dataF" class="form-control">
+                        <input type="date" name="dataI" required class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label">Data Final</label>
+                    <div class="col-sm-10">
+                        <input type="date" name="dataF" required class="form-control">
                     </div>
                 </div>
                 <div class="showback">
@@ -30,20 +35,21 @@ include_once 'topo.php';
 </div><!--FROMULARIO DE VENDAS FIM -->
 <?php
 include_once '../../classes/classVendas.php';
-if (isset($_POST['dataI']) && isset($_POST['dataF'])) {
+if (isset($_POST['nomeProd']) && isset($_POST['dataI']) && isset($_POST['dataF'])) {
+    $NomeProduto = $_POST['nomeProd'];
     $dataI = $_POST['dataI'];
     $dataF = $_POST['dataF'];
 
     $objVenda = new Vendas();
     $objBusca = new DadosVenda();
-    $buscar = $objBusca->buscaVendasXdata($objVenda, $dataI, $dataF);
+    $buscar = $objBusca->buscarVendaXdataEproduto($objVenda, $NomeProduto, $dataI, $dataF)
     ?>
-<table border="2" class="table table-bordered table-striped table-condensed"><p> <h4>Busca de : " <?php echo $dataI ; ?>  " até " <?php echo $dataF ; ?>  "</h4></p>
+<table border="2" class="table table-bordered table-striped table-condensed"><p> <h4>Busca por : " <?php echo $NomeProduto ; ?> "</h4></p>
         <thead> <th>Id</th><th>Data</th><th>Quantidade</th><th>Preco</th><th>Produto</th> <th>TOTAL</th> </thead>
     <tbody>
         <?php
         if ($buscar == array()) {
-            echo "NO HAY CONSULTAS VINCULADAS A ESA FECHA";
+            echo "NO HAY CONSULTAS VINCULADAS AL PRODUCTO O FECHA' {$NomeProduto} '";
         } else {
             foreach ($buscar as $linha) {
                 echo "<tr>";
@@ -53,10 +59,6 @@ if (isset($_POST['dataI']) && isset($_POST['dataF'])) {
                 echo "<td>" . $linha['PrecoVenda'] . "</td>";
                 echo "<td>" . $linha['NomeProduto'] . "</td>";
                 echo "<td>" . $linha['TOTAL'] . "</td>";
-
-                //echo"<td><a href='cancelarCons.php?idConsulta=" . $linha['idConsulta'] . "'>&nbspCANCELAR&nbsp</a></td>";
-                //echo"<td><a href='tratamentoConsulta.php?idConsulta=" . $linha['idConsulta'] . "'>&nbsp&nbspTRATAMENTO&nbsp</a></td>";
-
                 echo "</tr>";
             }
         }

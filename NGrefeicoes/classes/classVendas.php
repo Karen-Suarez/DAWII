@@ -257,15 +257,13 @@ class DadosVenda {
         }
     }
     
-    public function buscarVendaXdataEproduto($venda, $nomeProduto) {
+    public function buscarVendaXdataEproduto($venda, $nomeProduto, $dataI, $dataF) {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
             $connectPDO->exec('set names utf8'); // lee caracteres especiales
             $connectPDO->beginTransaction();
-            //$sqlSelect = "SELECT * FROM vendas WHERE DataVenda BETWEEN '$dataI' AND '$dataF'";
-            $sqlSelect = "SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda LIKE '%" . $nomeProduto . "%' GROUP BY vendas.IdVenda";
-            /* SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda BETWEEN '$dataI' AND '$dataF' GROUP BY vendas.IdVenda; */
+            $sqlSelect = "SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda BETWEEN '$dataI' AND '$dataF' AND produtos.NomeProduto LIKE '%" . $nomeProduto . "%' GROUP BY vendas.IdVenda";
             $preparedStm = $connectPDO->prepare($sqlSelect);
             $preparedStm->bindValue(":IdVenda", $venda->getIdVenda());
             //$preparedStm->execute();
@@ -286,8 +284,8 @@ class DadosVenda {
         }
     }
     
-    public function totalVenda($venda) {
+    #public function totalVenda($venda) {
         # code...
-    }
+    #}
 
 }
