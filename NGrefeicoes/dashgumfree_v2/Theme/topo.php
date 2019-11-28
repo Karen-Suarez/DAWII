@@ -23,6 +23,9 @@
     <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <!--<link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />-->
     <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">    
+    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
+      
     
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">

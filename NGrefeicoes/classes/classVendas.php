@@ -41,6 +41,7 @@ class Vendas {
     public function setIdVenda($IdVenda) {
         $this->IdVenda = $IdVenda;
     }
+
     public function setDataVenda($DataVenda) {
         $this->DataVenda = $DataVenda;
     }
@@ -177,6 +178,7 @@ class DadosVenda {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8');
             $connectPDO->beginTransaction();
             $sqlDelete = "DELETE FROM vendas WHERE IdVenda= :IdVenda";
             $preparedStm = $connectPDO->prepare($sqlDelete);
@@ -199,27 +201,27 @@ class DadosVenda {
         }
     }
 
-    public function buscaVendasXdata($venda,$dataI,$dataF){
+    public function buscaVendasXdata($venda, $dataI, $dataF) {
         $connectPDO;
         try {
             $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); // lee caracteres especiales
             $connectPDO->beginTransaction();
             //$sqlSelect = "SELECT * FROM vendas WHERE DataVenda BETWEEN '$dataI' AND '$dataF'";
             $sqlSelect = "SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda BETWEEN '$dataI' AND '$dataF' GROUP BY vendas.IdVenda";
-            /*SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda BETWEEN '$dataI' AND '$dataF' GROUP BY vendas.IdVenda;*/
+            /* SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda BETWEEN '$dataI' AND '$dataF' GROUP BY vendas.IdVenda; */
             $preparedStm = $connectPDO->prepare($sqlSelect);
             $preparedStm->bindValue(":IdVenda", $venda->getIdVenda());
             //$preparedStm->execute();
 
-            if($preparedStm->execute() == true) {
+            if ($preparedStm->execute() == true) {
                 $connectPDO->commit();
                 return $preparedStm->fetchAll();
             } else {
                 throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
             }
             $connectPDO->commit();
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             echo $e->getMessage();
         } finally {
             if (isset($connectPDO)) {
@@ -227,10 +229,64 @@ class DadosVenda {
             }
         }
     }
-    public function buscarVendaXproduto($venda){
-        # code...
+
+    public function buscarVendaXproduto($venda, $nomeProduto) {
+        $connectPDO;
+        try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); // lee caracteres especiales
+            $connectPDO->beginTransaction();
+            $sqlSelect = "SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE produtos.NomeProduto LIKE '%" . $nomeProduto . "%'  GROUP BY vendas.IdVenda";
+            $preparedStm = $connectPDO->prepare($sqlSelect);
+            $preparedStm->bindValue(":IdVenda", $venda->getIdVenda());
+            //$preparedStm->execute();
+
+            if ($preparedStm->execute() == true) {
+                $connectPDO->commit();
+                return $preparedStm->fetchAll();
+            } else {
+                throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
+            }
+            $connectPDO->commit();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        } finally {
+            if (isset($connectPDO)) {
+                unset($connectPDO);
+            }
+        }
     }
-    public function totalVenda($venda){
+    
+    public function buscarVendaXdataEproduto($venda, $nomeProduto) {
+        $connectPDO;
+        try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); // lee caracteres especiales
+            $connectPDO->beginTransaction();
+            //$sqlSelect = "SELECT * FROM vendas WHERE DataVenda BETWEEN '$dataI' AND '$dataF'";
+            $sqlSelect = "SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda LIKE '%" . $nomeProduto . "%' GROUP BY vendas.IdVenda";
+            /* SELECT vendas.IdVenda,vendas.DataVenda, vendas.QuantidadeVenda, vendas.PrecoVenda, vendas.IdProdutoFk,  produtos.NomeProduto, SUM((vendas.QuantidadeVenda * vendas.PrecoVenda)) AS TOTAL FROM vendas INNER JOIN produtos ON vendas.IdProdutoFk = produtos.IdProduto WHERE vendas.DataVenda BETWEEN '$dataI' AND '$dataF' GROUP BY vendas.IdVenda; */
+            $preparedStm = $connectPDO->prepare($sqlSelect);
+            $preparedStm->bindValue(":IdVenda", $venda->getIdVenda());
+            //$preparedStm->execute();
+
+            if ($preparedStm->execute() == true) {
+                $connectPDO->commit();
+                return $preparedStm->fetchAll();
+            } else {
+                throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
+            }
+            $connectPDO->commit();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        } finally {
+            if (isset($connectPDO)) {
+                unset($connectPDO);
+            }
+        }
+    }
+    
+    public function totalVenda($venda) {
         # code...
     }
 

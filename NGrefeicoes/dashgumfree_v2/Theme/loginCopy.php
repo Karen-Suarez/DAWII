@@ -37,15 +37,17 @@
 		      <form class="form-login" method="POST" action="RformLogin.php">
 		        <h2 class="form-login-heading">Faça seu login</h2>
 		        <div class="login-wrap">
-		            <input type="email" class="form-control" placeholder="Email" name="Email" autofocus>
+		            <input type="email" class="form-control" placeholder="Email" name="Email" required autofocus>
 		            <br>
-		            <input type="password" class="form-control" placeholder="Senha" name="Senha">
+		            <input type="password" class="form-control" placeholder="Senha" required name="Senha">
 		            <label class="checkbox">
-		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal"> esqueceu sua senha?</a>
-		
-		                </span>
-		            </label>
+		            <span class="pull-right">
+						<a data-toggle="modal" href="login.html#myModal"> esqueceu sua senha?</a>
+					</span>
+					</label>
+					<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!CAPTCHA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+					<div class="g-recaptcha" data-sitekey="6LdOB8QUAAAAABaALuBr0qhu2aFKc-B9tfBOG0UG"></div>
+					<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!CAPTCHA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 		            <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Entrar</button>
 		            <hr>
 		            
@@ -90,7 +92,20 @@
     <script src="assets/js/bootstrap.min.js"></script>
 
     <!--BACKSTRETCH-->
-    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+	<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!CAPTCHA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        
+        <script src="https://www.google.com/recaptcha/api.js?render=6LdOB8QUAAAAABaALuBr0qhu2aFKc-B9tfBOG0UG"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6LdOB8QUAAAAABaALuBr0qhu2aFKc-B9tfBOG0UG', {action: 'homepage'}).then(function(token) {
+       ...
+    });
+});
+</script>
+        
+	<!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!CAPTCHA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
     <script>
         $.backstretch("../../img/fundoComidas.jpg", {speed: 500});

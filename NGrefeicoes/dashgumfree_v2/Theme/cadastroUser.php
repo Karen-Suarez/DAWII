@@ -37,16 +37,15 @@
 		      <form class="form-login" method="POST" action="usuarioCadastroOk.php">
 		        <h2 class="form-login-heading">CADASTRO DE USUARIO</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" placeholder="Nome" name="Nome" autofocus>
+		            <input type="text" class="form-control" placeholder="Nome" name="Nome" autofocus required>
 					<br>
-					<input type="email" class="form-control" placeholder="Email" name="Email" autofocus>
+					<input type="email" class="form-control" placeholder="Email" name="Email" autofocus required>
 		            <br>
 		            <input type="password" class="form-control" placeholder="SENHA" name="Senha">
 		            <br>
-		            <button class="btn btn-theme btn-block" type="submit"> FAZER CADASTRO</button>
-		            <hr>
-		            
-		
+		            <button class="btn btn-theme btn-block" type="submit">FAZER CADASTRO</button>
+					<hr>
+					<button class="btn btn-theme btn-block" type="submit" onClick="history.go(-1)">VOLTAR</button>
 		        </div>
 		
 		          <!-- Modal -->

@@ -1,13 +1,12 @@
 <?php
 include_once 'topo.php';
-
 ?>
 <!-- FROMULARIO DE VENDAS -->
 <div class="row mt">
     <div class="col-lg-12">
         <div class="form-panel">
             <h4 class="mb"><i class="fa fa-angle-right"></i> Lista de Vendas por data</h4>
-            <form class="form-horizontal style-form" name="form" action="#">
+            <form class="form-horizontal style-form" name="form" action="#" method="POST">
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">DATA INICIAL</label>
                     <div class="col-sm-10">
@@ -21,21 +20,51 @@ include_once 'topo.php';
                         <input type="date" name="dataF" class="form-control">
                     </div>
                 </div>
-                
                 <div class="showback">
                     <!--<i class="fa fa-angle-right"></i> -->
-                <button type="submit" class="btn btn-primary btn-lg btn-block">BUSCAR</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">BUSCAR</button>
                 </div>
             </form>
         </div>
     </div><!-- col-lg-12-->      	
 </div><!--FROMULARIO DE VENDAS FIM -->
 <?php
-    include_once '../../classes/classVendas.php';
-    if (isset()) {//CONTINUAAAAAAAR!!!!!!!!
-        # code...
-    }
-?>
+include_once '../../classes/classVendas.php';
+if (isset($_POST['dataI']) && isset($_POST['dataF'])) {
+    $dataI = $_POST['dataI'];
+    $dataF = $_POST['dataF'];
+
+    $objVenda = new Vendas();
+    $objBusca = new DadosVenda();
+    $buscar = $objBusca->buscaVendasXdata($objVenda, $dataI, $dataF);
+    ?>
+<table border="2" class="table table-bordered table-striped table-condensed"><p> <h4>Busca de : " <?php echo $dataI ; ?>  " até " <?php echo $dataF ; ?>  "</h4></p>
+        <thead> <th>Id</th><th>Data</th><th>Quantidade</th><th>Preco</th><th>Produto</th> <th>TOTAL</th> </thead>
+    <tbody>
+        <?php
+        if ($buscar == array()) {
+            echo "NO HAY CONSULTAS VINCULADAS A UN NOMBRE QUE TENGA ' {$nomeBusca} '";
+        } else {
+            foreach ($buscar as $linha) {
+                echo "<tr>";
+                echo "<td>" . $linha['IdVenda'] . "</td>";
+                echo "<td>" . $linha['DataVenda'] . "</td>";
+                echo "<td>" . $linha['QuantidadeVenda'] . "</td>";
+                echo "<td>" . $linha['PrecoVenda'] . "</td>";
+                echo "<td>" . $linha['NomeProduto'] . "</td>";
+                echo "<td>" . $linha['TOTAL'] . "</td>";
+
+                //echo"<td><a href='cancelarCons.php?idConsulta=" . $linha['idConsulta'] . "'>&nbspCANCELAR&nbsp</a></td>";
+                //echo"<td><a href='tratamentoConsulta.php?idConsulta=" . $linha['idConsulta'] . "'>&nbsp&nbspTRATAMENTO&nbsp</a></td>";
+
+                echo "</tr>";
+            }
+        }
+        ?>
+    </tbody>
+    </table>
+
+<?php } ?>
 
 <?php include_once "rodape.html"; ?>
 

@@ -8,6 +8,7 @@ $l = $listaProd->listar($objProd);
 <h3><i class="fa fa-angle-right"></i> VENDAS</h3>
 
 <!-- FROMULARIO DE VENDAS -->
+
 <div class="row mt">
     <div class="col-lg-12">
         <div class="form-panel">
@@ -44,6 +45,7 @@ $l = $listaProd->listar($objProd);
                         <input type="number" name="preco" step="0.01" placeholder="Preço sem simbolo R$" class="form-control">
                     </div>
                 </div>
+                
                 <div class="showback">
                                       <!--<i class="fa fa-angle-right"></i> -->
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button>
@@ -74,7 +76,6 @@ $l = $listaProd->listar($objProd);
 
 
 <script src="assets/js/form-component.js"></script>    
-
 
 <script>
     //custom select box
