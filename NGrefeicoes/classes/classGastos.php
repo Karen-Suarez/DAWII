@@ -201,15 +201,63 @@ class DadosGastos {
         }
     }
 
-    public function buscarGastoXdata($gasto){
-        # code...
+    public function buscarGastoXdata($gasto, $dataI, $dataF){
+        $connectPDO;
+        try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); // lee caracteres especiales
+            $connectPDO->beginTransaction();
+            $sqlSelect = "SELECT gastos.IdGasto, gastos.DataGasto, gastos.ValorGasto, gastos.ComentarioGasto, tipoGastos.NomeTipoGasto FROM gastos INNER JOIN tipoGastos ON gastos.IdTipoGastoFk = tipoGastos.IdTipoGasto WHERE gastos.DataGasto BETWEEN '$dataI' AND '$dataF'";
+            
+            /* SELECT gastos.IdGasto, gastos.DataGasto, gastos.ValorGasto, gastos.ComentarioGasto, tipoGastos.NomeTipoGasto FROM gastos INNER JOIN tipoGastos ON gastos.IdTipoGastoFk = tipoGastos.IdTipoGasto WHERE gastos.DataGasto BETWEEN '$dataI' AND '$dataF' */
+            $preparedStm = $connectPDO->prepare($sqlSelect);
+            $preparedStm->bindValue(":IdGasto", $gasto->getIdGasto());
+            //$preparedStm->execute();
+
+            if ($preparedStm->execute() == true) {
+                $connectPDO->commit();
+                return $preparedStm->fetchAll();
+            } else {
+                throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
+            }
+            $connectPDO->commit();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        } finally {
+            if (isset($connectPDO)) {
+                unset($connectPDO);
+            }
+        }
     }
-    public function buscarGastoXtipoGasto($gasto){
-        # code...
+    public function buscarGastoXtipoGastoEdata($gasto, $dataI, $dataF, $nomeTipGasto){
+        $connectPDO;
+        try {
+            $connectPDO = new PDO('mysql:host=localhost;dbname=ngrefeicoes', 'root', '');
+            $connectPDO->exec('set names utf8'); // lee caracteres especiales
+            $connectPDO->beginTransaction();
+            $sqlSelect = "SELECT gastos.IdGasto, gastos.DataGasto, gastos.ValorGasto, gastos.ComentarioGasto, tipoGastos.NomeTipoGasto FROM gastos INNER JOIN tipoGastos ON gastos.IdTipoGastoFk = tipoGastos.IdTipoGasto WHERE gastos.DataGasto BETWEEN '$dataI' AND '$dataF' AND tipoGastos.NomeTipoGasto LIKE '%" . $nomeTipGasto . "%'";
+            $preparedStm = $connectPDO->prepare($sqlSelect);
+            $preparedStm->bindValue(":IdGasto", $gasto->getIdGasto());
+            //$preparedStm->execute();
+
+            if ($preparedStm->execute() == true) {
+                $connectPDO->commit();
+                return $preparedStm->fetchAll();
+            } else {
+                throw new PDOException("Error Processing Request" . $preparedStm->errorCode() . "-" . implode($preparedStm->errorInfo()));
+            }
+            $connectPDO->commit();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        } finally {
+            if (isset($connectPDO)) {
+                unset($connectPDO);
+            }
+        }
     }
     public function totalGasto($gasto)
     {
-        # code...
+        # code...VER COMO HACER LA SUMA DE LOS TOTALES!!!!!!!!!
     }
 
 }

@@ -94,7 +94,7 @@
 
 					// Auto close sibling menus
 					if(defaults.autoClose == true){
-						autoCloseAccordion($parentsLi, $parentsUl);
+						//autoCloseAccordion($parentsLi, $parentsUl);
 					}
 
 					if ($('> ul',$activeLi).is(':visible')){
@@ -145,7 +145,7 @@
 
 			// Auto close sibling menus
 			if(defaults.autoClose == true){
-				autoCloseAccordion($parentsLi, $parentsUl);
+				//autoCloseAccordion($parentsLi, $parentsUl);
 
 			}
 
@@ -180,12 +180,12 @@
 		}
 
 		// Auto-Close Open Menu Items
-		function autoCloseAccordion($parentsLi, $parentsUl){
-			$('ul',obj).not($parentsUl).slideUp(defaults.speed);
-			// Reset active links
-			$('a',obj).removeClass(defaults.classActive);
-			$('> a',$parentsLi).addClass(defaults.classActive);
-		}
+		// function autoCloseAccordion($parentsLi, $parentsUl){
+		// 	$('ul',obj).not($parentsUl).slideUp(defaults.speed);
+		// 	// Reset active links
+		// 	$('a',obj).removeClass(defaults.classActive);
+		// 	$('> a',$parentsLi).addClass(defaults.classActive);
+		// }
 		// Reset accordion using active links
 		function resetAccordion(){
 			$('ul',obj).hide();

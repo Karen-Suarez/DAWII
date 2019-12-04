@@ -1,12 +1,11 @@
 <?php
 include_once 'topo.php';
-$soma = 0;
 ?>
 <!-- FROMULARIO DE VENDAS -->
 <div class="row mt">
     <div class="col-lg-12">
         <div class="form-panel">
-            <h4 class="mb"><i class="fa fa-angle-right"></i>Buscar Vendas por data</h4>
+            <h4 class="mb"><i class="fa fa-angle-right"></i> Lista de Gastos por Data</h4>
             <form class="form-horizontal style-form" name="form" action="#" method="POST">
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">DATA INICIAL</label>
@@ -30,17 +29,17 @@ $soma = 0;
     </div><!-- col-lg-12-->      	
 </div><!--FROMULARIO DE VENDAS FIM -->
 <?php
-include_once '../../classes/classVendas.php';
+include_once '../../classes/classGastos.php';
 if (isset($_POST['dataI']) && isset($_POST['dataF'])) {
     $dataI = $_POST['dataI'];
     $dataF = $_POST['dataF'];
 
-    $objVenda = new Vendas();
-    $objBusca = new DadosVenda();
-    $buscar = $objBusca->buscaVendasXdata($objVenda, $dataI, $dataF);
+    $objGasto = new Gastos();
+    $objBusca = new DadosGastos();
+    $buscar = $objBusca->buscarGastoXdata($objGasto, $dataI, $dataF);
     ?>
 <table border="2" class="table table-bordered table-striped table-condensed"><p> <h4>Busca de : " <?php echo $dataI ; ?>  " até " <?php echo $dataF ; ?>  "</h4></p>
-        <thead> <th>Id</th><th>Data</th><th>Quantidade</th><th>Preco</th><th>Produto</th> <th>TOTAL</th> </thead>
+        <thead><th>Nome</th>  <th>Data</th><th>Valor Gasto</th><th>Comentario</th></thead>
     <tbody>
         <?php
         if ($buscar == array()) {
@@ -48,34 +47,12 @@ if (isset($_POST['dataI']) && isset($_POST['dataF'])) {
         } else {
             foreach ($buscar as $linha) {
                 echo "<tr>";
-                echo "<td>" . $linha['IdVenda'] . "</td>";
-                echo "<td>" . $linha['DataVenda'] . "</td>";
-                echo "<td>" . $linha['QuantidadeVenda'] . "</td>";
-                echo "<td>" . $linha['PrecoVenda'] . "</td>";
-                echo "<td>" . $linha['NomeProduto'] . "</td>";
-                echo "<td>" . $linha['TOTAL'] . "</td>";
+                echo "<td>" . $linha['NomeTipoGasto'] . "</td>";
+                echo "<td>" . $linha['DataGasto'] . "</td>";
+                echo "<td>" . $linha['ValorGasto'] . "</td>";
+                echo "<td>" . $linha['ComentarioGasto'] . "</td>";
                 echo "</tr>";
-                $soma = $soma +  (float)$linha['TOTAL'];/* suma totales generales*/
             }
-            
-            echo"<tr>";
-            echo"<td> &nbsp </td>";
-            echo"<td> &nbsp </td>";
-            echo"<td> &nbsp </td>";
-            echo"<td> &nbsp </td>";
-            echo"<td> &nbsp </td>";
-            echo"<td> &nbsp </td>";
-            echo"<tr>";
-
-            echo"<tr>";
-            echo"<td> &nbsp </td>";
-            echo"<td> &nbsp </td>";
-            echo"<td> &nbsp </td>";
-            echo"<td> &nbsp </td>";
-            echo"<td><font size='3'> <b>TOTAL GERAL</b> </font></td>";
-            echo"<td><font size='3'><b>".$soma."</b></font></td>";
-            echo"<tr>";
-            
         }
         ?>
     </tbody>

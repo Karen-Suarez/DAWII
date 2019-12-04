@@ -41,7 +41,7 @@
 					<br>
 					<input type="email" class="form-control" placeholder="Email" name="Email" autofocus required>
 		            <br>
-		            <input type="password" class="form-control" placeholder="SENHA" name="Senha">
+		            <input type="password" class="form-control" placeholder="SENHA" name="Senha" required>
 		            <br>
 		            <button class="btn btn-theme btn-block" type="submit">FAZER CADASTRO</button>
 					<hr>

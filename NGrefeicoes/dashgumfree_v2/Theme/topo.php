@@ -76,7 +76,7 @@
               	  <h5 class="centered"> Nenê & Gularte r.</h5>
               	  	
                   <li class="mt">
-                      <a class="active" href="index.php">
+                      <a  href="index.php">
                           <i class="fa fa-dashboard"></i>
                           <span>HOME</span>
                       </a>
@@ -143,6 +143,16 @@
                       <ul class="sub">
                           <li><a  href="morris.html">Morris</a></li>
                           <li><a  href="chartjs.html">Chartjs</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-th"></i>
+                          <span>Data Tables</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="basic_table.html">Basic Table</a></li>
+                          <li><a  href="responsive_table.html">Responsive Table</a></li>
                       </ul>
                   </li>
 
