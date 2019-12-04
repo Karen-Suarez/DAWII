@@ -1,6 +1,7 @@
 <?php
 include_once 'topo.php';
-$soma = 0;
+$somaV = 0;
+$somaG = 0;
 ?>
 <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
@@ -20,15 +21,7 @@ $soma = 0;
                     <span>HOME</span>
                 </a>
             </li>
-            <li class="sub-menu">
-                <a href="javascript:;" >
-                    <i class="fa fa-desktop"></i>
-                    <span>SALDO</span>
-                </a>
-                <ul class="sub">
-                    <li><a  href="insert_vendas.php">Calcular Saldo</a></li>
-                </ul>
-            </li>
+
             <li class="sub-menu">
                 <a href="javascript:;" >
                     <i class="fa fa-desktop"></i>
@@ -36,10 +29,8 @@ $soma = 0;
                 </a>
                 <ul class="sub">
                     <li><a  href="insert_vendas.php">Adicionar Vendas</a></li>
-                    <li><a  href="listar_vendas.php">Lista de Todas as vendas</a></li>
-                    <li><a  href="buscarVendaXdata.php">Buscar Vendas x datas</a></li>
-                    <li><a  href="buscarVendaXproduto.php">Buscar Vendas x Produto</a></li>
-                    <li><a  href="buscarVendaXdataEproduto.php">Buscar x Data/Produto</a></li>
+                    <li><a  href="listar_vendas.php">Lista das vendas</a></li>
+                    <li><a  href="#">Buscar Vendas</a></li>
                 </ul>
             </li>
 
@@ -51,8 +42,7 @@ $soma = 0;
                 <ul class="sub">
                     <li><a  href="insert_gastos.php">Adicionar Gasto</a></li>
                     <li><a  href="listar_gastos.php">Lista de Gastos</a></li>
-                    <li><a  href="buscarGastoXdata.php">Buscar gasto x Data</a></li>
-                    <li><a  href="buscarGastoXdataEnome.php">Buscar gasto x Data/nome</a></li>
+                    <li><a  href="#">buscar</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -75,6 +65,37 @@ $soma = 0;
                     <li><a  href="listar_tipo_gastos.php">Lista de Tipo de gastos</a></li>
                 </ul>
             </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-th"></i>
+                    <span>Data Tables</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="basic_table.php">Basic Table</a></li>
+                    <li><a  href="responsive_table.html">Responsive Table</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class=" fa fa-bar-chart-o"></i>
+                    <span>Charts</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="morris.html">Morris</a></li>
+                    <li><a  href="chartjs.html">Chartjs</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-th"></i>
+                    <span>Data Tables</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="basic_table.html">Basic Table</a></li>
+                    <li><a  href="responsive_table.html">Responsive Table</a></li>
+                </ul>
+            </li>
+
         </ul>
         <!-- sidebar menu end-->
     </div>
@@ -87,28 +108,41 @@ MAIN CONTENT
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
+
         <!-- FROMULARIO DE VENDAS -->
         <div class="row mt">
             <div class="col-lg-12">
                 <div class="form-panel">
-                    <h4 class="mb"><i class="fa fa-angle-right"></i> Lista de Vendas por Produto</h4>
+                    <h4 class="mb"><i class="fa fa-angle-right"></i>Saldos</h4>
                     <form class="form-horizontal style-form" name="form" action="#" method="POST">
+                        <h4>Intervalo de Datas das <b>Vendas</b><br><br></h4>
                         <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Produto</label>
+
+                            <label class="col-sm-2 col-sm-2 control-label">DATA INICIAL</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nomeProd" placeholder="Nome do Produto" required class="form-control">
+                                <input type="date" name="dataIvenda" class="form-control">
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Data inicial</label>
+                            <label class="col-sm-2 col-sm-2 control-label">DATA FINAL</label>
                             <div class="col-sm-10">
-                                <input type="date" name="dataI" required class="form-control">
+                                <input type="date" name="dataFvenda" class="form-control">
                             </div>
                         </div>
+                        <h4><br><br>Intervalo de Datas dos <b>Gastos</b><br><br></h4>
                         <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Data Final</label>
+
+                            <label class="col-sm-2 col-sm-2 control-label">DATA INICIAL</label>
                             <div class="col-sm-10">
-                                <input type="date" name="dataF" required class="form-control">
+                                <input type="date" name="dataIgasto" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">DATA FINAL</label>
+                            <div class="col-sm-10">
+                                <input type="date" name="dataFgasto" class="form-control">
                             </div>
                         </div>
                         <div class="showback">
@@ -121,49 +155,65 @@ MAIN CONTENT
         </div><!--FROMULARIO DE VENDAS FIM -->
         <?php
         include_once '../../classes/classVendas.php';
-        if (isset($_POST['nomeProd']) && isset($_POST['dataI']) && isset($_POST['dataF'])) {
-            $NomeProduto = $_POST['nomeProd'];
-            $dataI = $_POST['dataI'];
-            $dataF = $_POST['dataF'];
+        include_once '../../classes/classGastos.php';
+        if (isset($_POST['dataIvenda']) && isset($_POST['dataFvenda']) && isset($_POST['dataIgasto']) && isset($_POST['dataFgasto'])) {
+            $dataIvenda = $_POST['dataIvenda'];
+            $dataFvenda = $_POST['dataFvenda'];
+            $dataIgasto = $_POST['dataIgasto'];
+            $dataFgasto = $_POST['dataFgasto'];
 
             $objVenda = new Vendas();
-            $objBusca = new DadosVenda();
-            $buscar = $objBusca->buscarVendaXdataEproduto($objVenda, $NomeProduto, $dataI, $dataF)
+            $objBuscaV = new DadosVenda();
+            $buscarV = $objBuscaV->buscaVendasXdata($objVenda, $dataIvenda, $dataFvenda);
+
+            $objGasto = new Gastos();
+            $objBuscaG = new DadosGastos();
+            $buscarG = $objBuscaG->buscarGastoXdata($objGasto, $dataIgasto, $dataFgasto);
             ?>
-            <table border="2" class="table table-bordered table-striped table-condensed"><p> <h4>Busca por : " <?php echo $NomeProduto; ?> "</h4></p>
-                <thead> <th>Id</th><th>Data</th><th>Quantidade</th><th>Preco</th><th>Produto</th> <th>TOTAL</th> </thead>
+            <table border="2" class="table table-bordered table-striped table-condensed"><p> <h4>Busca de : " <?php echo $dataIvenda; ?>  " até " <?php echo $dataFvenda; ?>  "</h4></p>
                 <tbody>
                     <?php
-                    if ($buscar == array()) {
-                        echo "NO HAY CONSULTAS VINCULADAS AL PRODUCTO O FECHA' {$NomeProduto} '";
+                    if ($buscarV == array() || $buscarG == array()) {
+                        echo "NO HAY CONSULTAS VINCULADAS A ESAS FECHAS";
                     } else {
-                        foreach ($buscar as $linha) {
-                            echo "<tr>";
-                            echo "<td>" . $linha['IdVenda'] . "</td>";
-                            echo "<td>" . $linha['DataVenda'] . "</td>";
-                            echo "<td>" . $linha['QuantidadeVenda'] . "</td>";
-                            echo "<td>" . $linha['PrecoVenda'] . "</td>";
-                            echo "<td>" . $linha['NomeProduto'] . "</td>";
-                            echo "<td>" . $linha['TOTAL'] . "</td>";
-                            echo "</tr>";
-                            $soma = $soma + (float) $linha['TOTAL']; /* suma totales generales */
+                        foreach ($buscarV as $linha) {
+                            $linha['TOTAL'];
+                            
+                            $somaV = $somaV + (float) $linha['TOTAL']; /* suma totales generales */
                         }
+
                         echo"<tr>";
-                        echo"<td> &nbsp </td>";
-                        echo"<td> &nbsp </td>";
-                        echo"<td> &nbsp </td>";
-                        echo"<td> &nbsp </td>";
+                        echo"<td><font size='3'> <b>TOTAL GERAL VENDAS</b> </font></td>";
+                        echo"<td><font size='3'><b>" . $somaV . "</b></font></td>";
+                        echo"<tr>";
+
+                        foreach ($buscarG as $linha1) {
+                            $linha1['ValorGasto'];
+                            /*echo "<tr>";
+                            echo "<td>" . $linha1['ValorGasto'] . "</td>";
+                            echo "</tr>";*/
+                            $somaG = $somaG + (float) $linha1['ValorGasto']; /* suma totales generales */
+                        }
+
+                        echo"<tr>";
                         echo"<td> &nbsp </td>";
                         echo"<td> &nbsp </td>";
                         echo"<tr>";
 
                         echo"<tr>";
+                        echo"<td><font size='3'> <b>TOTAL GERAL GASTOS</b> </font></td>";
+                        echo"<td><font size='3'><b>" . $somaG . "</b></font></td>";/*ARREGLAR PARA QUE APAREZCAN LAS CASAS DECIMALES Y NO REDONDEE EL VALOR!!!*/
+                        echo"<tr>";
+                        
+                        echo"<tr>";
                         echo"<td> &nbsp </td>";
                         echo"<td> &nbsp </td>";
-                        echo"<td> &nbsp </td>";
-                        echo"<td> &nbsp </td>";
-                        echo"<td><font size='3'> <b>TOTAL GERAL</b> </font></td>";
-                        echo"<td><font size='3'><b>" . $soma . "</b></font></td>";
+                        echo"<tr>";
+                        /*SALDO ES EL TOTAL DE VENTAS MENOS EL TOTAL DE GASTOS*/
+                        $saldo=($somaV) - ($somaG);
+                        echo"<tr>";
+                        echo"<td><font size='3'> <b>SALDO EM CAIXA</b> </font></td>";
+                        echo"<td><font size='3'><b>" . $saldo . "</b></font></td>";/*ARREGLAR PARA QUE APAREZCAN LAS CASAS DECIMALES Y NO REDONDEE EL VALOR!!!*/
                         echo"<tr>";
                     }
                     ?>

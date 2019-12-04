@@ -18,6 +18,5 @@ if ( (isset($_POST['Email'])) && (isset($_POST['Senha'])) ) {
     //echo'deu merda';
     header('Location: loginCopy.php');
     }
-//TERMINAR EL CAPTCHA DE GOOGLE!!!!
 }
 
