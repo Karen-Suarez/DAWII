@@ -70,7 +70,7 @@ include_once "topo.php";
                     <span>TIPO GASTO</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="insert_tipo_gastos.php">Adicionar Novo Tipo de Gasto</a></li>
+                    <li><a  href="insert_tipo_gastos.php">Adicionar Tipo de Gasto</a></li>
                     <li><a  href="listar_tipo_gastos.php">Lista de Tipo de gastos</a></li>
                 </ul>
             </li>
@@ -96,7 +96,7 @@ MAIN CONTENT
                     <h4 class="mb"><i class="fa fa-angle-right"></i> INSERIR PRODUTO</h4>
                     <form class="form-horizontal style-form" action="rInsertProduto.php" method="POST">
                         <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">NOME MODIFICADO!!!</label>
+                            <label class="col-sm-2 col-sm-2 control-label">NOME</label>
                             <div class="col-sm-10">
                                 <input  type="text" name="nomeProduto" class="form-control">
                             </div>

@@ -21,7 +21,15 @@ $somaG = 0;
                     <span>HOME</span>
                 </a>
             </li>
-
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-desktop"></i>
+                    <span>SALDO</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="calculosSaldos.php">Calcular Saldo</a></li>
+                </ul>
+            </li>
             <li class="sub-menu">
                 <a href="javascript:;" >
                     <i class="fa fa-desktop"></i>
@@ -29,8 +37,10 @@ $somaG = 0;
                 </a>
                 <ul class="sub">
                     <li><a  href="insert_vendas.php">Adicionar Vendas</a></li>
-                    <li><a  href="listar_vendas.php">Lista das vendas</a></li>
-                    <li><a  href="#">Buscar Vendas</a></li>
+                    <li><a  href="listar_vendas.php">Lista de Todas as vendas</a></li>
+                    <li><a  href="buscarVendaXdata.php">Buscar Vendas x datas</a></li>
+                    <li><a  href="buscarVendaXproduto.php">Buscar Vendas x Produto</a></li>
+                    <li><a  href="buscarVendaXdataEproduto.php">Buscar x Data/Produto</a></li>
                 </ul>
             </li>
 
@@ -42,7 +52,8 @@ $somaG = 0;
                 <ul class="sub">
                     <li><a  href="insert_gastos.php">Adicionar Gasto</a></li>
                     <li><a  href="listar_gastos.php">Lista de Gastos</a></li>
-                    <li><a  href="#">buscar</a></li>
+                    <li><a  href="buscarGastoXdata.php">Buscar gasto x Data</a></li>
+                    <li><a  href="buscarGastoXdataEnome.php">Buscar gasto x Data/nome</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -61,41 +72,10 @@ $somaG = 0;
                     <span>TIPO GASTO</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="insert_tipo_gastos.php">Adicionar Novo Tipo de Gasto</a></li>
+                    <li><a  href="insert_tipo_gastos.php">Adicionar Tipo de Gasto</a></li>
                     <li><a  href="listar_tipo_gastos.php">Lista de Tipo de gastos</a></li>
                 </ul>
             </li>
-            <li class="sub-menu">
-                <a href="javascript:;" >
-                    <i class="fa fa-th"></i>
-                    <span>Data Tables</span>
-                </a>
-                <ul class="sub">
-                    <li><a  href="basic_table.php">Basic Table</a></li>
-                    <li><a  href="responsive_table.html">Responsive Table</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;" >
-                    <i class=" fa fa-bar-chart-o"></i>
-                    <span>Charts</span>
-                </a>
-                <ul class="sub">
-                    <li><a  href="morris.html">Morris</a></li>
-                    <li><a  href="chartjs.html">Chartjs</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;" >
-                    <i class="fa fa-th"></i>
-                    <span>Data Tables</span>
-                </a>
-                <ul class="sub">
-                    <li><a  href="basic_table.html">Basic Table</a></li>
-                    <li><a  href="responsive_table.html">Responsive Table</a></li>
-                </ul>
-            </li>
-
         </ul>
         <!-- sidebar menu end-->
     </div>
@@ -174,7 +154,7 @@ MAIN CONTENT
                 <tbody>
                     <?php
                     if ($buscarV == array() || $buscarG == array()) {
-                        echo "NO HAY CONSULTAS VINCULADAS A ESAS FECHAS";
+                        echo "NO HAY DATOS VINCULADAS A ESAS FECHAS";
                     } else {
                         foreach ($buscarV as $linha) {
                             $linha['TOTAL'];

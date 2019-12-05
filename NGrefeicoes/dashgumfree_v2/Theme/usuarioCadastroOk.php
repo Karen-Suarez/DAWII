@@ -17,4 +17,3 @@ if ($ok) {
     //echo 'deu merda!';
     header("Location:cadastroUser.php");  
 }
-/** TERMINAR SENHAS COM HASH"""""""""""""""""""!!!!!!!!!!!!!!!!!!!! */
